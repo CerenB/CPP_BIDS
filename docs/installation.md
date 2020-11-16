@@ -1,20 +1,19 @@
 # Installation
 
-<!-- lint disable -->
+<!-- vscode-markdown-toc -->
 
-<!-- TOC -->
+-   1. [Download with git](#Downloadwithgit)
+-   2. [Add as a submodule](#Addasasubmodule)
+    -   2.1. [Example for submodule usage](#Exampleforsubmoduleusage)
+-   3. [Direct download](#Directdownload)
 
--   [Installation](#installation)
-    -   [Download with git](#download-with-git)
-    -   [Add as a submodule](#add-as-a-submodule)
-        -   [Example for submodule usage](#example-for-submodule-usage)
-    -   [Direct download](#direct-download)
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 
-<!-- /TOC -->
-
-<!-- lint enable -->
-
-## Download with git
+## 1. <a name='Downloadwithgit'></a>Download with git
 
 ```bash
 cd fullpath_to_directory_where_to_install
@@ -44,7 +43,7 @@ number
 git checkout -b version1 v0.0.1
 ```
 
-## Add as a submodule
+## 2. <a name='Addasasubmodule'></a>Add as a submodule
 
 Add it as a submodule in the repo you are working on.
 
@@ -70,7 +69,7 @@ git submodule update --remote --merge
 
 Remember that updates to submodules need to be committed as well.
 
-### Example for submodule usage
+### 2.1. <a name='Exampleforsubmoduleusage'></a>Example for submodule usage
 
 So say you want to clone a repo that has some nested submodules, then you would
 type this to get the content of all the submodules at once (here with assumption
@@ -92,13 +91,14 @@ git submodule foreach --recursive 'git submodule init'
 git submodule foreach --recursive 'git submodule update'
 ```
 
-## Direct download
+## 3. <a name='Directdownload'></a>Direct download
 
 Download the code. Unzip. And add to the matlab path.
 
-Pick a specific version from
-[HERE](https://github.com/cpp-lln-lab/CPP_BIDS/releases)
+Pick a specific version:
 
-Or take the
-[latest commit](https://github.com/cpp-lln-lab/CPP_BIDS/archive/master.zip) (NOT
-RECOMMENDED).
+https://github.com/cpp-lln-lab/CPP_BIDS/releases
+
+Or take the latest commit (NOT RECOMMENDED):
+
+https://github.com/cpp-lln-lab/CPP_BIDS/archive/master.zip

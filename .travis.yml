@@ -51,7 +51,4 @@ jobs:
       before_script:
         - npm install `cat npm-requirements.txt`
       script:
-        - remark README.md --frail
-        - remark ./notebooks/ --frail
-        - remark ./tests/ --frail
-        - remark ./docs/ --frail
+        - remark . --frail
