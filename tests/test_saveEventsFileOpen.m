@@ -1,3 +1,5 @@
+% (C) Copyright 2020 CPP_BIDS developers
+
 function test_suite = test_saveEventsFileOpen %#ok<*STOUT>
     try % assignment of 'localfunctions' is necessary in Matlab >= 2016
         test_functions = localfunctions(); %#ok<*NASGU>
@@ -25,8 +27,10 @@ function test_saveEventsFileOpenBasic()
 
     cfg = createFilename(cfg);
 
+    logFile = saveEventsFile('init', cfg);
+
     % create the events file and header
-    logFile = saveEventsFile('open', cfg);
+    logFile = saveEventsFile('open', cfg, logFile);
 
     % close the file
     saveEventsFile('close', cfg, logFile);
@@ -70,8 +74,10 @@ function test_saveEventsFileOpenStimfile()
 
     cfg = createFilename(cfg);
 
+    logFile = saveEventsFile('init_stim', cfg);
+
     % create the events file and header
-    logFile = saveEventsFile('open_stim', cfg);
+    logFile = saveEventsFile('open', cfg, logFile);
 
     % close the file
     saveEventsFile('close', cfg, logFile);
@@ -110,6 +116,8 @@ function test_saveEventsFileOpenExtraColumns()
     % define the extra columns
     % they will be added to the tsv files in the order the user input them
     logFile.extraColumns = {'Speed', 'is_Fixation'};
+
+    logFile = saveEventsFile('init', cfg, logFile);
 
     % create the events file and header
     logFile = saveEventsFile('open', cfg, logFile);

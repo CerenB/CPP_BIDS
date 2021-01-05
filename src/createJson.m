@@ -4,7 +4,7 @@ function createJson(varargin)
     %
     % Creates the side car JSON file for a run.
     %
-    % For JSON sidecars for bold files,  this will only contain the minimum BIDS
+    % For JSON sidecars for bold files, this will only contain the minimum BIDS
     % requirement and will likey be less complete than the info you could from
     % a proper BIDS conversion.
     %
@@ -25,6 +25,10 @@ function createJson(varargin)
     %                   in your source dataset but it might have to be cleaned up to create
     %                   a valid BIDS dataset.
     % :type extraInfo: structure
+    %
+    % :output:
+    %          - :``*.json``: (jsonfile) The file name corresponds to the run + suffix depending
+    %                         on the arguments passed in.
     %
     % .. TODO:
     %

@@ -8,10 +8,12 @@ List of functions in the ``utils`` folder.
 .. automodule:: src.utils
 
 .. autofunction:: checkCppBidsDependencies
+.. autofunction:: checkInput
 .. autofunction:: createValidName
 .. autofunction:: getFullFilename
 .. autofunction:: initializeExtraColumns
 .. autofunction:: isPositiveInteger
+.. autofunction:: nanPadding
 .. autofunction:: printCreditsCppBids
 .. autofunction:: removeAllDateSuffix
 .. autofunction:: removeDateSuffix
@@ -19,4 +21,7 @@ List of functions in the ``utils`` folder.
 .. autofunction:: returnNamesExtraColumns
 .. autofunction:: returnNbColumns
 .. autofunction:: setDefaultFields
-.. autofunction:: transferInfoToBids
+
+.. automodule:: src.gui 
+
+.. autofunction:: askUserCli

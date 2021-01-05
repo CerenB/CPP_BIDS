@@ -1,3 +1,5 @@
+% (C) Copyright 2020 CPP_BIDS developers
+
 function test_suite = test_createDatasetDescription %#ok<*STOUT>
     try % assignment of 'localfunctions' is necessary in Matlab >= 2016
         test_functions = localfunctions(); %#ok<*NASGU>
@@ -8,7 +10,7 @@ end
 
 function test_createDatasetDescriptionBasic()
 
-    outputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'output');
+    outputDir = fullfile(fileparts(mfilename('fullpath')), 'output');
 
     %% set up
 

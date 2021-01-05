@@ -1,3 +1,5 @@
+% (C) Copyright 2020 CPP_BIDS developers
+
 function test_suite = test_createDataDictionary %#ok<*STOUT>
     try % assignment of 'localfunctions' is necessary in Matlab >= 2016
         test_functions = localfunctions(); %#ok<*NASGU>
@@ -8,7 +10,7 @@ end
 
 function test_createDataDictionaryBasic()
 
-    outputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'output');
+    outputDir = fullfile(fileparts(mfilename('fullpath')), 'output');
 
     %% set up
 
@@ -25,13 +27,14 @@ function test_createDataDictionaryBasic()
 
     cfg = createFilename(cfg);
 
-    logFile.extraColumns.Speed.length = 1;
-    logFile.extraColumns.LHL24.length = 3;
+    logFile.extraColumns = {'Speed', 'LHL24'};
+
     logFile = saveEventsFile('init', cfg, logFile);
 
-    logFile = saveEventsFile('open', cfg, logFile);
+    logFile.extraColumns.Speed.length = 1;
+    logFile.extraColumns.LHL24.length = 3;
 
-    createDataDictionary(cfg, logFile);
+    logFile = saveEventsFile('open', cfg, logFile);
 
     %% check that the file has the right path and name
 
@@ -46,29 +49,37 @@ function test_createDataDictionaryBasic()
 
     %% check content
 
+    return
+
     % TODO fix error in CI
     % failure: /github/workspace/lib/JSONio/jsonread.mex: failed to load:
     %    liboctinterp.so.4: cannot open shared object file: No such file or directory
     % jsondecode:27 (/github/workspace/lib/bids-matlab/+bids/+util/jsondecode.m)
     % test_createDataDictionary>test_createDataDictionaryBasic:48
     %   (/github/workspace/tests/test_createDataDictionary.m)
+    %
+    %     failure: fileread: cannot open file
+    %     fileread:37 (/octave/share/octave/5.2.0/m/io/fileread.m)
+    %     jsondecode:27 (/github/workspace/lib/bids-matlab/+bids/+util/jsondecode.m)
+    %     test_createDataDictionary>test_createDataDictionaryBasic:62
 
-    %     actualStruct = bids.util.jsondecode(fullfile(funcDir, jsonFilename));
-    %
-    %     % data to test against
-    %     expectedStruct = bids.util.jsondecode( ...
-    %                                           fullfile(pwd, ...
-    %     'testData', ...
-    %         'eventsDataDictionary.json'));
-    %
-    %     % test
-    %     assertTrue(isequal(expectedStruct, actualStruct));
+    actualStruct = bids.util.jsondecode(fullfile(funcDir, jsonFilename));
+
+    % data to test against
+    expectedStruct = bids.util.jsondecode( ...
+                                          fullfile( ...
+                                                   pwd, ...
+                                                   'testData', ...
+                                                   'eventsDataDictionary.json'));
+
+    % test
+    assertTrue(isequal(expectedStruct, actualStruct));
 
 end
 
 function test_createDataDictionaryStim()
 
-    outputDir = fullfile(fileparts(mfilename('fullpath')), '..', 'output');
+    outputDir = fullfile(fileparts(mfilename('fullpath')), 'output');
 
     %% set up
 
@@ -85,6 +96,10 @@ function test_createDataDictionaryStim()
 
     cfg = createFilename(cfg);
 
+    stimLogFile.extraColumns = {'Speed', 'LHL24', 'is_Fixation'};
+
+    stimLogFile = saveEventsFile('init_stim', cfg, stimLogFile);
+
     stimLogFile.extraColumns.Speed.length = 1;
     stimLogFile.extraColumns.LHL24.length = 3;
     stimLogFile.extraColumns.is_Fixation.length = 1;
@@ -92,11 +107,7 @@ function test_createDataDictionaryStim()
     stimLogFile.SamplingFrequency = 100;
     stimLogFile.StartTime = 0;
 
-    stimLogFile = saveEventsFile('init', cfg, stimLogFile);
-
-    stimLogFile = saveEventsFile('open_stim', cfg, stimLogFile);
-
-    createDataDictionary(cfg, stimLogFile);
+    stimLogFile = saveEventsFile('open', cfg, stimLogFile);
 
     %% check that the file has the right path and name
 
@@ -111,11 +122,30 @@ function test_createDataDictionaryStim()
 
     %% check content
 
+    return
+
     % TODO fix error in CI
     % failure: /github/workspace/lib/JSONio/jsonread.mex: failed to load:
     %    liboctinterp.so.4: cannot open shared object file: No such file or directory
     % jsondecode:27 (/github/workspace/lib/bids-matlab/+bids/+util/jsondecode.m)
     % test_createDataDictionary>test_createDataDictionaryBasic:48
     %   (/github/workspace/tests/test_createDataDictionary.m)
+    %
+    %     failure: fileread: cannot open file
+    %     fileread:37 (/octave/share/octave/5.2.0/m/io/fileread.m)
+    %     jsondecode:27 (/github/workspace/lib/bids-matlab/+bids/+util/jsondecode.m)
+    %     test_createDataDictionary>test_createDataDictionaryStim:128
+
+    actualStruct = bids.util.jsondecode(fullfile(funcDir, jsonFilename));
+
+    % data to test against
+    expectedStruct = bids.util.jsondecode( ...
+                                          fullfile( ...
+                                                   pwd, ...
+                                                   'testData', ...
+                                                   'stimDataDictionary.json'));
+
+    % test
+    assertTrue(isequal(expectedStruct, actualStruct));
 
 end
